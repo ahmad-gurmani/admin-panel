@@ -2,3 +2,28 @@
 @tailwind base; /*base layer*/
 @tailwind components; /*components layer*/
 @tailwind utilities; /*utilities layer*/
+
+*,
+:before,
+:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
