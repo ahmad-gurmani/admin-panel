@@ -1,14 +1,14 @@
 import { Fragment } from "react";
-import "./sign-up-form.component.scss";
+
 
 const SignUpForm = () => {
     return (
         <Fragment>
-            <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">
+            <div className="h-screen w-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <div className="sm:mx-auto sm:w-full sm:max-w-md mb-3">
-                            <h2 className="mt-2 text-center text-3xl font-bold text-gray-900">Sign up</h2>
+                            <h2 className="text-center text-3xl font-bold text-gray-900">Sign up</h2>
                         </div>
 
                         <form className="space-y-6" action="#" method="POST">

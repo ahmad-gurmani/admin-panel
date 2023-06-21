@@ -1,20 +1,26 @@
 import { Fragment } from "react";
+import { } from "react";
 
-import "./sign-in-form.component.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
+    const navigate = useNavigate();
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        navigate('/home');
+    }
+
     return (
         <Fragment>
-            <div className="h-full w-full flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">
+            <div className="h-screen w-full flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <div className="sm:mx-auto sm:w-full sm:max-w-md mb-3">
                             <img
                                 className="mx-auto h-12 w-auto"
                                 src="https://assets.stickpng.com/thumbs/6102f6007bcc7d000476ae45.png"
-                                alt="food-logo"
-                            />
+                                alt="food-logo" />
                             <h2 className="mt-2 text-center text-3xl font-bold text-gray-900">Sign in to your account</h2>
                             <p className="mt-2 text-center text-sm text-gray-600">
                                 Or{' '}
@@ -34,7 +40,7 @@ const SignInForm = () => {
                                         name="email"
                                         type="email"
                                         autoComplete="email"
-                                        required
+                                        // required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
                                     />
                                 </div>
@@ -50,7 +56,7 @@ const SignInForm = () => {
                                         name="password"
                                         type="password"
                                         autoComplete="current-password"
-                                        required
+                                        // required
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
                                     />
                                 </div>
@@ -77,11 +83,8 @@ const SignInForm = () => {
                             </div>
 
                             <div>
-                                <button
-                                    type="submit"
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
-                                >
-                                    Sign in
+                                <button type="submit" onClick={submitHandler}
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Sign in
                                 </button>
                             </div>
                         </form>

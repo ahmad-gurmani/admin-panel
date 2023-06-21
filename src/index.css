@@ -23,7 +23,8 @@ body {
   height: 100%;
 }
 
-a {
+li {
+  list-style-type: none;
   text-decoration: none;
   color: black;
 }
