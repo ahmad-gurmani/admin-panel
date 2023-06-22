@@ -1,14 +1,22 @@
 import { Fragment } from "react";
-import { } from "react";
+
+import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 
 import { Link, useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
+
+    const logGoogleUser = async () => {
+        //when we call something from database we use async function
+        const response = await signInWithGooglePopup();
+        console.log(response);
+    }
+
     const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        navigate('/home');
+        navigate('/dashboard');
     }
 
     return (
@@ -106,11 +114,9 @@ const SignInForm = () => {
                                     </Link>
                                 </div>
                                 <div>
-                                    <a href="#" className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                        <div>
-                                            <h3>Sign in with google</h3>
-                                        </div>
-                                    </a>
+                                    <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" onClick={logGoogleUser}>
+                                        Sign in with google
+                                    </button>
                                 </div>
                             </div>
                         </div>

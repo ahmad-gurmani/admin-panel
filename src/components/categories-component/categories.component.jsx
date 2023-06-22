@@ -1,13 +1,12 @@
-import { Fragment } from "react";
-
+import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 
 const Categories = () => {
     return (
-        <Fragment>
+        <NavbarTemplate>
             <div className="w-screen bg-gray-200 shadow-sm h-screen">
                 <h1>categories-cntent</h1>
             </div>
-        </Fragment>
+        </NavbarTemplate>
     )
 }
 

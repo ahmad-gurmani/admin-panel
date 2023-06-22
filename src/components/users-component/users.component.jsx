@@ -1,9 +1,9 @@
-import { Fragment } from "react";
+import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 
 
 const Users = () => {
     return (
-        <Fragment>
+        <NavbarTemplate>
             <div className="w-screen shadow-sm bg-gray-200 h-screen flex items-center justify-center">
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-3/4">
                     <div className="flex items-center justify-between  text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 px-6 py-6">
@@ -91,7 +91,7 @@ const Users = () => {
                     </table>
                 </div>
             </div>
-        </Fragment>
+        </NavbarTemplate>
     )
 }
 

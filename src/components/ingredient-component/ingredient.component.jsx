@@ -1,14 +1,13 @@
-import { Fragment } from "react";
+import SidebarTemplate from "../sidebar-template/sidebar-template.component";
 
 
 const Ingredient = () => {
     return (
-        <Fragment>
-
+        <SidebarTemplate>
             <div className="w-screen bg-gray-200 shadow-sm h-screen">
                 <h1>ingredient-content</h1>
             </div>
-        </Fragment>
+        </SidebarTemplate>
     )
 }
 

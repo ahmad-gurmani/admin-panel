@@ -1,4 +1,5 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
+import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 // import { ReactComponent as IconMenu } from '../../assets/MaskGroup.svg'
 
 const Dashboard = () => {
@@ -12,7 +13,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <Fragment>
+        <NavbarTemplate>
             <div className="w-screen bg-gray-200 h-screen shadow-sm round">
                 {/* <h1>Dashboard-cntent</h1> */}
                 {/* <IconMenu /> */}
@@ -43,7 +44,7 @@ const Dashboard = () => {
                 </div>
 
             </div>
-        </Fragment>
+        </NavbarTemplate>
     )
 }
 
