@@ -2,6 +2,8 @@ import { Fragment } from "react";
 
 
 const SignUpForm = () => {
+
+
     return (
         <Fragment>
             <div className="h-screen w-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">

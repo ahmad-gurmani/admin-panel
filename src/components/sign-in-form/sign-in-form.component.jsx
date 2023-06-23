@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
+import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,8 +8,8 @@ const SignInForm = () => {
 
     const logGoogleUser = async () => {
         //when we call something from database we use async function
-        const response = await signInWithGooglePopup();
-        console.log(response);
+        const { user } = await signInWithGooglePopup();
+        const userDocRef = await createUserDocumentFromAuth(user);
     }
 
     const navigate = useNavigate();

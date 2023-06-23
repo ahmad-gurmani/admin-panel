@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 // import { ReactComponent as IconMenu } from '../../assets/MaskGroup.svg'
 
 const Dashboard = () => {
 
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            console.log('This will run after 1 second!')
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, []);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         console.log('This will run after 1 second!')
+    //     }, 1000);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
     return (
         <NavbarTemplate>

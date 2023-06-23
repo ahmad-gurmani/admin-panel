@@ -19,6 +19,7 @@ const Sidebar = () => {
         { text: "Sign Out", to: "/", icon: VscSignOut }
     ];
 
+
     return (
         <Fragment>
             <div className="w-64 p-14">
@@ -31,7 +32,6 @@ const Sidebar = () => {
                     return (
                         <div key={index} className="flex flex-col sm:flex">
                             <Link className="text-gray-500 focus:text-white inline-flex items-center py-2 px-4 text-sm font-medium mb-9 focus:bg-amber-500 rounded"
-                                // onClick={() => handleClick(link)}
                                 to={link.to}
                             >
                                 <span className="flex items-center gap-4"><Icon />{link.text}</span>
