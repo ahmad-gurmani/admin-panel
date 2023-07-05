@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 
-import { getAuth, signInWithRedirect, signInWithPopup, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 
-import { getFirestore, collection, doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBV4r81Fey-joWnyrELp_TZxB0gzXZbjHQ",
@@ -17,18 +17,25 @@ const firebaseConfig = {
 // eslint-disable-next-line no-unused-vars
 const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
     prompt: "select_account"
 })
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+// export const signInWithGooleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore(firebaseApp);
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+    userAuth,
+    additionalInformation = {}
+) => {
+    // if i don't get userAuth then return noting
+    if (!userAuth) return;
+
     const userDocRef = doc(db, "user", userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
@@ -43,6 +50,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
                 displayName,
                 email,
                 createdAt,
+                ...additionalInformation,
             })
         } catch (error) {
             console.log("error cathcing the user", error.message);
@@ -54,54 +62,9 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 
 }
 
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    // if i don't get userAuth then return noting
+    if (!email || !password) return;
 
-
-
-
-// import { collection, addDoc } from "firebase/firestore";
-
-// try {
-//   const docRef = await addDoc(collection(db, "users"), {
-//     first: "Ada",
-//     last: "Lovelace",
-//     born: 1815
-//   });
-//   console.log("Document written with ID: ", docRef.id);
-// } catch (e) {
-//   console.error("Error adding document: ", e);
-// }
-
-
-// try {
-//     const docRef = await setDoc(collection(db, "users"), {
-//         first: "",
-//         last: "",
-//         born: 1815
-//     });
-//     console.log("Document written with ID: ", docRef.id);
-// } catch (e) {
-//     console.error("Error adding document: ", e);
-// }
-
-
-
-// export const signUpwithEmailAndPassword = signUpwithEmailAndPassword();
-
-
-// import { collection, getDocs } from "firebase/firestore";
-
-// const querySnapshot = await getDocs(collection(db, "users"));
-// querySnapshot.forEach((doc) => {
-//   console.log(`${doc.id} => ${doc.data()}`);
-// });
-
-
-
-// Allow read/write access on all documents to any user signed in to the application
-// service cloud.firestore {
-//     match /databases/{database}/documents {
-//       match /{document=**} {
-//         allow read, write: if request.auth != null;
-//       }
-//     }
-//   }
+    return await createUserWithEmailAndPassword(auth, email, password);
+}

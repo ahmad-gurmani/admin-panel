@@ -35,21 +35,21 @@ const Users = () => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="pb-2">
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     Usama
                                 </th>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-6">
                                     Usama@gmail.com
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-6">
                                     Admin
                                 </td>
-                                <td className="px-3 py-4">
+                                <td className="px-3 py-6">
                                     <a href="#" className="font-medium text-white dark:text-amber-500 hover:bg-green-700 rounded bg-green-600 px-4 py-2">Edit</a>
                                 </td>
-                                <td className="px-3 py-4">
+                                <td className="px-3 py-6">
                                     <a href="#" className="font-medium text-white dark:text-amber-500 hover:bg-red-700 rounded bg-red-600 px-4 py-2">Delete</a>
                                 </td>
                             </tr>
@@ -57,16 +57,16 @@ const Users = () => {
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     Microsoft Surface Pro
                                 </th>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-6">
                                     White
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-6">
                                     Laptop PC
                                 </td>
-                                <td className="px-3 py-4">
+                                <td className="px-3 py-6">
                                     <a href="#" className="font-medium text-white dark:text-amber-500 hover:bg-green-700 rounded bg-green-600 px-4 py-2">Edit</a>
                                 </td>
-                                <td className="px-3 py-4">
+                                <td className="px-3 py-6">
                                     <a href="#" className="font-medium text-white dark:text-amber-500 hover:bg-red-700 rounded bg-red-600 px-4 py-2">Delete</a>
                                 </td>
                             </tr>
@@ -74,13 +74,13 @@ const Users = () => {
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     Magic Mouse 2
                                 </th>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-6">
                                     Black
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="px-6 py-6">
                                     Accessories
                                 </td>
-                                <td className="px-3 py-4">
+                                <td className="px-3 py-6">
                                     <a href="#" className="font-medium text-white dark:text-amber-500 hover:bg-green-700 rounded bg-green-600 px-4 py-2">Edit</a>
                                 </td>
                                 <td className="px-3 py-4">

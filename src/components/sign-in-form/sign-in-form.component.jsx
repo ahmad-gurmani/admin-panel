@@ -12,11 +12,12 @@ const SignInForm = () => {
         const userDocRef = await createUserDocumentFromAuth(user);
     }
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        navigate('/dashboard');
+
+        // navigate('/dashboard');
     }
 
     return (
@@ -37,7 +38,7 @@ const SignInForm = () => {
                                 </a>
                             </p>
                         </div>
-                        <form className="space-y-6" action="#" method="POST">
+                        <form className="space-y-6" action="#" onSubmit={submitHandler} method="POST">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email address
@@ -91,7 +92,7 @@ const SignInForm = () => {
                             </div>
 
                             <div>
-                                <button type="submit" onClick={submitHandler}
+                                <button
                                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Sign in
                                 </button>
                             </div>
