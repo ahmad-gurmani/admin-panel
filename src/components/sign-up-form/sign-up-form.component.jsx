@@ -16,20 +16,6 @@ const defaultFormField = {
 const SignUpForm = () => {
     const navigate = useNavigate();
     const [spinner, setSpinner] = useState(false);
-    // const [isLoading, setIsLoading] = useState(true);
-
-
-    //     function upload() {
-    //         setSpinner(true);
-
-    //         //some async process
-    //         fetch('my/API/Endpoint'), {
-    //             method: 'post', .0
-    //  body: body,
-    //         }).then(function (data) {
-    //             setSpinner(false);
-    //         };
-    //     }
 
     const [formFields, setFormFields] = useState(defaultFormField);
     const { displayName, email, password, confirmPassword } = formFields;
@@ -42,14 +28,15 @@ const SignUpForm = () => {
             return;
         }
         try {
+            setSpinner(true);
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
 
             if (user.uid) {
                 await createUserDocumentFromAuth(user, { displayName });
                 resetFromfield();
+                setSpinner(false);
                 navigate("/");
-            } if (!user.uid) {
-                <Spinner />
+                alert('User created successfully');
             }
 
         } catch (error) {
@@ -130,8 +117,8 @@ const SignUpForm = () => {
                                     value: confirmPassword,
                                 }}
                             />
-                            <div>
-                                <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Sign up</button>
+                            <div className="w-full flex justify-center py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                {!spinner ? <button className="w-full h-full">Sign up</button> : <Spinner />}
                             </div>
                         </form>
                     </div>

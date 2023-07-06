@@ -1,23 +1,59 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 
-import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 
-import { Link, useNavigate } from "react-router-dom";
+import InputForm from "../input-form/input-form.component";
+import Spinner from "../spinner/spinner.component";
+
+const defaultFormField = {
+    email: "",
+    password: "",
+};
 
 const SignInForm = () => {
+    const [formFields, setFormFields] = useState(defaultFormField);
+    const [spinner, setSpinner] = useState(false);
+    const { email, password } = formFields;
 
-    const logGoogleUser = async () => {
+    const signInWithGoogle = async () => {
         //when we call something from database we use async function
         const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
+        await createUserDocumentFromAuth(user);
     }
 
     // const navigate = useNavigate();
 
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const resetFormFields = () => {
+        setFormFields(defaultFormField);
+    }
+
+    const submitHandler = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await signInAuthUserWithEmailAndPassword(email, password);
+            console.log(response);
+            resetFormFields();
+        } catch (error) {
+            switch (error.code) {
+                case "auth/wrong-password":
+                    alert("invalid password");
+                    break;
+                case "auth/user-not-found":
+                    alert("user not found");
+                    break;
+                default:
+                    console.log(error);
+            }
+        }
 
         // navigate('/dashboard');
+    }
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormFields({ ...formFields, [name]: value });
     }
 
     return (
@@ -31,70 +67,35 @@ const SignInForm = () => {
                                 src="https://assets.stickpng.com/thumbs/6102f6007bcc7d000476ae45.png"
                                 alt="food-logo" />
                             <h2 className="mt-2 text-center text-3xl font-bold text-gray-900">Sign in to your account</h2>
-                            <p className="mt-2 text-center text-sm text-gray-600">
-                                Or{' '}
-                                <a href="#" className="font-medium text-amber-500 hover:text-amber-600">
-                                    start your 14-day free trial
-                                </a>
-                            </p>
                         </div>
-                        <form className="space-y-6" action="#" onSubmit={submitHandler} method="POST">
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Email address
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        autoComplete="email"
-                                        // required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                                    />
-                                </div>
-                            </div>
+                        <form className="space-y-6" onSubmit={submitHandler}>
+                            <InputForm
+                                label="Email"
+                                inputOptions={{
+                                    id: "email",
+                                    name: "email",
+                                    type: "email",
+                                    autoComplete: "email",
+                                    required: true,
+                                    onChange: handleChange,
+                                    value: email,
+                                }}
+                            />
+                            <InputForm
+                                label="Password"
+                                inputOptions={{
+                                    id: "password",
+                                    name: "password",
+                                    type: "password",
+                                    autoComplete: "password",
+                                    required: true,
+                                    onChange: handleChange,
+                                    value: password,
+                                }}
+                            />
 
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                    Password
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        autoComplete="current-password"
-                                        // required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <input
-                                        id="remember-me"
-                                        name="remember-me"
-                                        type="checkbox"
-                                        className="h-4 w-4 text-amber-500 focus:ring-amber-600 border-gray-300 rounded"
-                                    />
-                                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                        Remember me
-                                    </label>
-                                </div>
-
-                                <div className="text-sm">
-                                    <a href="#" className="font-medium text-amber-500 hover:text-amber-600">
-                                        Forgot your password?
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div>
-                                <button
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Sign in
-                                </button>
+                            <div className="w-full flex justify-center py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                {!spinner ? <button className="w-full h-full">Sign in</button> : <Spinner />}
                             </div>
                         </form>
 
@@ -110,12 +111,12 @@ const SignInForm = () => {
 
                             <div className="mt-6 grid grid-cols-2 gap-3">
                                 <div>
-                                    <Link to="/signup" className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <Link to="/signup" className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-blue-500 hover:text-white">
                                         Sign up
                                     </Link>
                                 </div>
                                 <div>
-                                    <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" onClick={logGoogleUser}>
+                                    <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-blue-500 hover:text-white" onClick={signInWithGoogle}>
                                         Sign in with google
                                     </button>
                                 </div>
