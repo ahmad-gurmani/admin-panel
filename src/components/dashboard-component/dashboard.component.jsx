@@ -1,17 +1,10 @@
 // import { useEffect } from "react";
+// import { auth } from "../../utils/firebase/firebase.utils";
 import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 // import { ReactComponent as IconMenu } from '../../assets/MaskGroup.svg'
+// import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-
-
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         console.log('This will run after 1 second!')
-    //     }, 1000);
-    //     return () => clearTimeout(timer);
-    // }, []);
-
     return (
         <NavbarTemplate>
             <div className="w-screen bg-gray-200 h-screen shadow-sm round">

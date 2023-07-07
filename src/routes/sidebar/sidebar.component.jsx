@@ -1,12 +1,13 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import SignOut from "../../components/sign-out-button/sign-out-button.component";
 
 import { BiCategoryAlt } from 'react-icons/bi';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { CiBurger } from 'react-icons/ci';
 import { BiFoodMenu } from 'react-icons/bi';
 import { FiUsers } from 'react-icons/fi';
-import { VscSignOut } from 'react-icons/vsc';
+
 
 const Sidebar = () => {
 
@@ -16,7 +17,7 @@ const Sidebar = () => {
         { text: "Recipes", to: "/recipes", icon: CiBurger },
         { text: "Ingredient", to: "/ingredient", icon: BiFoodMenu },
         { text: "Users", to: "/users", icon: FiUsers },
-        { text: "Sign Out", to: "/", icon: VscSignOut }
+        // { text: "Sign Out", to: "/", icon: VscSignOut }
     ];
 
 
@@ -31,7 +32,7 @@ const Sidebar = () => {
 
                     return (
                         <div key={index} className="flex flex-col sm:flex">
-                            <Link className="text-gray-500 focus:text-white inline-flex items-center py-2 px-4 text-sm font-medium mb-9 focus:bg-amber-500 rounded"
+                            <Link className="text-gray-500 hover:text-white inline-flex items-center py-2 px-4 text-sm font-medium mb-9 hover:bg-amber-500 rounded"
                                 to={link.to}
                             >
                                 <span className="flex items-center gap-4"><Icon />{link.text}</span>
@@ -40,6 +41,7 @@ const Sidebar = () => {
                     )
                 })
                 }
+                <SignOut />
             </div>
         </Fragment>
     )

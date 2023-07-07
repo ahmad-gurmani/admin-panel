@@ -1,10 +1,10 @@
 import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 
 import InputForm from "../input-form/input-form.component";
-import Spinner from "../spinner/spinner.component";
+// import { onAuthStateChanged } from "firebase/auth";
 
 const defaultFormField = {
     email: "",
@@ -12,17 +12,28 @@ const defaultFormField = {
 };
 
 const SignInForm = () => {
+    const navigate = useNavigate();
     const [formFields, setFormFields] = useState(defaultFormField);
-    const [spinner, setSpinner] = useState(false);
     const { email, password } = formFields;
 
     const signInWithGoogle = async () => {
         //when we call something from database we use async function
         const { user } = await signInWithGooglePopup();
         await createUserDocumentFromAuth(user);
+        navigate("/dashboard");
     }
 
-    // const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (!user) {
+    //             // console.log("signed Out");
+    //             // alert('You are not signed in')
+    //             navigate("/");
+
+    //         } // else { setCurrentUser(user) }
+    //     });
+    // }, [navigate]);
 
     const resetFormFields = () => {
         setFormFields(defaultFormField);
@@ -33,8 +44,10 @@ const SignInForm = () => {
 
         try {
             const response = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(response);
-            resetFormFields();
+            if (response.user.uid) {
+                resetFormFields();
+                navigate('/dashboard');
+            }
         } catch (error) {
             switch (error.code) {
                 case "auth/wrong-password":
@@ -47,8 +60,6 @@ const SignInForm = () => {
                     console.log(error);
             }
         }
-
-        // navigate('/dashboard');
     }
 
     const handleChange = (event) => {
@@ -94,8 +105,8 @@ const SignInForm = () => {
                                 }}
                             />
 
-                            <div className="w-full flex justify-center py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
-                                {!spinner ? <button className="w-full h-full">Sign in</button> : <Spinner />}
+                            <div>
+                                <button className="w-full flex justify-center py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">Sign in</button>
                             </div>
                         </form>
 

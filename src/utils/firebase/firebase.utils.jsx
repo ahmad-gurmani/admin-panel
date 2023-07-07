@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 
-import { getAuth, signInWithPopup, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -10,7 +10,7 @@ const firebaseConfig = {
     projectId: "food-dashboard-db",
     storageBucket: "food-dashboard-db.appspot.com",
     messagingSenderId: "658476446300",
-    appId: "1:658476446300:web:49357cf3b74cd7d46dac99"
+    appId: "1:658476446300:web:49357cf3b74cd7d46dac99",
 };
 
 // Initialize Firebase
@@ -74,4 +74,15 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
 
     return await signInWithEmailAndPassword(auth, email, password);
+}
+
+export const signOutUser = () => {
+    console.log("Calling");
+    signOut(auth)
+        .then(() => {
+            alert("User Sign Out");
+        })
+        .catch((error) => {
+            console.log("user Sign out failed", error)
+        })
 }
