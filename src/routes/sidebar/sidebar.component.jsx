@@ -25,7 +25,7 @@ const Sidebar = () => {
         <Fragment>
             <div className="w-64 p-14">
                 <div className="flex justify-start items-center font-extrabold text-2xl pb-20 px-4">
-                    <Link to='/'>FoodTime<span className="text-amber-400">.</span></Link>
+                    <h1>FoodTime<span className="text-amber-400">.</span></h1>
                 </div>
                 {links.map((link, index) => {
                     const Icon = link.icon;

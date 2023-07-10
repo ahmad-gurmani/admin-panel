@@ -77,7 +77,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 }
 
 export const signOutUser = () => {
-    console.log("Calling");
     signOut(auth)
         .then(() => {
             alert("User Sign Out");
