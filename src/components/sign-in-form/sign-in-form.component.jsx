@@ -46,7 +46,7 @@ const SignInForm = () => {
             const response = await signInAuthUserWithEmailAndPassword(email, password);
             if (response.user.uid) {
                 resetFormFields();
-                navigate('/dashboard');
+                navigate('/dashboard', { replace: true });
             }
         } catch (error) {
             switch (error.code) {
@@ -69,7 +69,7 @@ const SignInForm = () => {
 
     return (
         <Fragment>
-            <div className="h-screen w-full flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">
+            <div className="h-full w-full flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-500  to-amber-500">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <div className="sm:mx-auto sm:w-full sm:max-w-md mb-3">

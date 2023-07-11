@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <div className="flex">
+      <div className="flex h-full">
         <Routes>
           <Route index path="/" element={<SignInForm />} />
           <Route path="/signup" element={<SignUpForm />} />

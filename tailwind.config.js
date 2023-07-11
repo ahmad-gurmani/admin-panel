@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      flex: {
+        2: '0 0 auto'
+      }
+
+    },
   }
 }
 
