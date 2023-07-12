@@ -1,7 +1,10 @@
 import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 
 
+
 const Recipes = () => {
+
+
     return (
         <NavbarTemplate>
             <div className="w-screen bg-gray-200 shadow-sm h-screen">

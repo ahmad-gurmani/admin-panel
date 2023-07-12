@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import NavbarTemplate from "../sidebar-template/sidebar-template.component";
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai"
 
-import "./categories.component.css"
+
 
 const slides = [
     {
@@ -36,19 +37,14 @@ const slides = [
 
 const Categories = () => {
     const elementRef = useRef(null);
-
     const [arrowDisable, setArrowDisable] = useState(true);
-
-
 
 
     const handleHorizantalScroll = (element, speed, distance, step) => {
         let scrollAmount = 0;
-
         const slideTimer = setInterval(() => {
             element.scrollLeft += step;
             scrollAmount += Math.abs(step);
-
             if (scrollAmount >= distance) {
                 clearInterval(slideTimer);
             }
@@ -62,33 +58,37 @@ const Categories = () => {
 
     return (
         <NavbarTemplate>
-            <div className="w-screen bg-gray-200 shadow-sm h-screen">
+            <div className="w-full bg-gray-200" >
                 <h1 className="font-extrabold text-2xl mx-6 mt-2">Categories</h1>
-                <div className="w-screen h-full flex justify-between 
-                gap-2">
-                    <div className="flex justify-around w-screen overflow-hidden gap-2 mt-10" ref={elementRef}>
-                        <button className="" onClick={() => {
-                            handleHorizantalScroll(elementRef.current, 25, 100, -10);
-                        }} disabled={arrowDisable}>previous</button>
-
-                        {slides.map((s, index) => {
-                            return (
-                                <div key={index} className="h-fit w-screen shadow-lg">
-                                    <div className="w-52 h-52 bg-white rounded ">
-                                        <div className="w-52 h-3/4">
-                                            <img src={s.url} className="h-full rounded-t" />
-                                        </div>
-                                        <p>{s.title}</p>
-                                    </div>
-                                </div>
-                            )
-                        })}
-
-                        <button onClick={() => {
-                            handleHorizantalScroll(elementRef.current, 25, 100, 10);
+                <div className="flex justify-between text-bold mt-6 mx-5">
+                    <button
+                        onClick={() => {
+                            handleHorizantalScroll(elementRef.current, 10, 250, -10);
                         }}
-                        >next</button>
-                    </div>
+                        disabled={arrowDisable}
+                    >
+                        <AiOutlineDoubleLeft />
+                    </button>
+                    <button
+                        onClick={() => {
+                            handleHorizantalScroll(elementRef.current, 10, 250, 10);
+                        }}
+                    >
+                        <AiOutlineDoubleRight />
+                    </button>
+                </div>
+                <div className="flex overflow-x-scroll image-container gap-6 mt-5" ref={elementRef} >
+                    {slides?.map((s, index) => (
+
+                        <div key={index} className="min-w-[20%] bg-white shadow-lg rounded transition-transform ease-in-out hover:scale-110">
+                            <div className="w-full h-3/4">
+                                <img src={s.url} className="rounded-t h-full w-full" />
+                            </div>
+                            <div className="flex justify-center items-center">
+                                <h3 className="mt-0.5 text-bold">{s.title}</h3>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </NavbarTemplate>
