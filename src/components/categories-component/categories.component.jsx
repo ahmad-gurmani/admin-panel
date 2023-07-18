@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import NavbarTemplate from "../sidebar-template/sidebar-template.component";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai"
 
-
-
 const slides = [
     {
         url: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
@@ -38,7 +36,6 @@ const slides = [
 const Categories = () => {
     const elementRef = useRef(null);
     const [arrowDisable, setArrowDisable] = useState(true);
-
 
     const handleHorizantalScroll = (element, speed, distance, step) => {
         let scrollAmount = 0;
